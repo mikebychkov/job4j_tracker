@@ -10,6 +10,11 @@ public class Item {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return this.name + "(" + this.id + ")";
+    }
+
     public String getId() {
         return id;
     }
