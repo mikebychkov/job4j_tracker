@@ -15,18 +15,16 @@ public class ValidateInputTest {
         ByteArrayOutputStream mem = new ByteArrayOutputStream();
         PrintStream out = System.out;
         System.setOut(new PrintStream(mem));
+        //
         String[] data = {"one", "1"};
-        ValidateInput input = new ValidateStubInput(data);
+        Input stub = new StubInput(data);
+        //
+        ValidateInput input = new ValidateInput(stub);
         input.askInt("Enter");
-        String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
-                .add("Enter")
-                .add("Please enter validate data again.")
-                .add("Enter")
-                .toString();
+        //
         assertThat(
                 mem.toString(),
-                //is(String.format("Please enter validate data again.%n"))
-                is(expect)
+                is(String.format("Please enter validate data again.%n"))
         );
         System.setOut(out);
     }
