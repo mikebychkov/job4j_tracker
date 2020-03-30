@@ -15,7 +15,7 @@ public class ConsoleInput implements Input {
     @Override
     public int askInt(String question) {
         System.out.println(question);
-        return Integer.valueOf(this.sc.nextLine());
+        return Integer.valueOf(askStr(question));
     }
 
     @Override
@@ -26,5 +26,10 @@ public class ConsoleInput implements Input {
         } else {
             throw new IllegalStateException(String.format("Out of about %s > [0, %s]", select, max));
         }
+    }
+
+    public static void main(String[] args) {
+        ConsoleInput ci = new ConsoleInput();
+        ci.askInt("Enter:");
     }
 }
