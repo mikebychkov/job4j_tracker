@@ -25,9 +25,4 @@ public class ConsoleInput implements Input {
         }
         return select;
     }
-
-    public static void main(String[] args) {
-        ConsoleInput ci = new ConsoleInput();
-        ci.askInt("Enter:");
-    }
 }
