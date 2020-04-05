@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.List;
 import java.util.StringJoiner;
 
 import static org.hamcrest.core.Is.is;
@@ -15,10 +16,9 @@ public class StartUITest {
         String[] answers = {"Fix PC"};
         Input input = new StubInput(answers);
         Tracker tracker = new Tracker();
-        //StartUI.createItem(input, tracker);
         UserAction create = new CreateAction();
         create.execute(input, tracker);
-        Item created = tracker.findAll()[0];
+        Item created = tracker.findAll().get(0);
         Item expected = new Item("Fix PC");
         assertThat(created.getName(), is(expected.getName()));
     }
@@ -32,7 +32,6 @@ public class StartUITest {
                 item.getId(), // id сохраненной заявки в объект tracker.
                 "replaced item"
         };
-        //StartUI.replaceItem(new StubInput(answers), tracker);
         UserAction replace = new ReplaceAction();
         replace.execute(new StubInput(answers), tracker);
         Item replaced = tracker.findById(item.getId());
@@ -47,7 +46,6 @@ public class StartUITest {
         String[] answers = {
                 item.getId()
         };
-        //StartUI.deleteItem(new StubInput(answers), tracker);
         UserAction delete = new DeleteAction();
         delete.execute(new StubInput(answers), tracker);
         Item replaced = tracker.findById(item.getId());
@@ -60,7 +58,7 @@ public class StartUITest {
                 new String[] {"0"}
         );
         StubAction action = new StubAction();
-        new StartUI().init(input, new Tracker(), new UserAction[] { action });
+        new StartUI().init(input, new Tracker(), List.of(action));
         assertThat(action.isCall(), is(true));
     }
 
@@ -73,7 +71,7 @@ public class StartUITest {
                 new String[] {"0"}
         );
         StubAction action = new StubAction();
-        new StartUI().init(input, new Tracker(), new UserAction[] { action });
+        new StartUI().init(input, new Tracker(), List.of(action));
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("Menu:")
                 .add("0. Stub action")
