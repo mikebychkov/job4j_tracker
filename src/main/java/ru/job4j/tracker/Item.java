@@ -1,18 +1,13 @@
 package ru.job4j.tracker;
 
-import java.util.Objects;
+import java.util.*;
 
-public class Item {
+public class Item implements Comparable<Item> {
     private String id;
     private String name;
 
     public Item(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return this.name + "(" + this.id + ")";
     }
 
     public String getId() {
@@ -29,5 +24,27 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + "(" + this.id + ")";
+    }
+
+    @Override
+    public int compareTo(Item item) {
+        return this.name.compareTo(item.name);
+    }
+
+    public static SortByNameDesc getDescComparator() {
+        return new SortByNameDesc();
+    }
+
+    private static class SortByNameDesc implements Comparator<Item> {
+
+        @Override
+        public int compare(Item o1, Item o2) {
+            return o2.name.compareTo(o1.name);
+        }
     }
 }
