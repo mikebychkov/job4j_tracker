@@ -35,28 +35,4 @@ public class Item implements Comparable<Item> {
     public int compareTo(Item item) {
         return this.name.compareTo(item.name);
     }
-
-    public static SortByNameAsc getAscComparator() {
-        return new SortByNameAsc();
-    }
-
-    private static class SortByNameAsc implements Comparator<Item> {
-
-        @Override
-        public int compare(Item o1, Item o2) {
-            return o1.name.compareTo(o2.name);
-        }
-    }
-
-    public static SortByNameDesc getDescComparator() {
-        return new SortByNameDesc();
-    }
-
-    private static class SortByNameDesc implements Comparator<Item> {
-
-        @Override
-        public int compare(Item o1, Item o2) {
-            return o2.name.compareTo(o1.name);
-        }
-    }
 }

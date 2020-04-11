@@ -48,7 +48,7 @@ public class ItemTest {
         exp.add(i1);
         exp.add(i2);
 
-        Collections.sort(items, Item.getAscComparator());
+        Collections.sort(items, new ItemByNameAsc());
 
         assertThat(items, is(exp));
     }
@@ -69,7 +69,7 @@ public class ItemTest {
         exp.add(i1);
         exp.add(i3);
 
-        Collections.sort(items, Item.getDescComparator());
+        Collections.sort(items, new ItemByNameDesc());
 
         assertThat(items, is(exp));
     }
