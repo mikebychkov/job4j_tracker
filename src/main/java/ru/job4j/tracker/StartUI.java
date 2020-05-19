@@ -16,6 +16,7 @@ public class StartUI {
     }
 
     private void showMenu(List<UserAction> actions) {
+        System.out.println();
         System.out.println("Menu:");
         int index = 0;
         for (UserAction ac : actions) {
@@ -23,11 +24,8 @@ public class StartUI {
         }
     }
 
-    public static void main(String[] args) {
-        Input input = new ConsoleInput();
-        Input validate = new ValidateInput(input);
-        Store tracker = new MemTracker();
-        List<UserAction> actions = List.of(
+    public static List<UserAction> getActionsList() {
+        return List.of(
                 new CreateAction(),
                 new ShowAllAction(),
                 new FindByIDAction(),
@@ -36,22 +34,18 @@ public class StartUI {
                 new DeleteAction(),
                 new ExitAction()
         );
-        new StartUI().init(validate, tracker, actions);
     }
-    /*
+
     public static void main(String[] args) {
-        Input validate = new ValidateInput(
-                new ConsoleInput()
-        );
+        Input input = new ConsoleInput();
+        Input validate = new ValidateInput(input);
         try (Store tracker = new SqlTracker()) {
             tracker.init();
-            UserAction[] actions = {
-                    new CreateAction()
-            };
-            new StartUI().init(validate, tracker, actions);
+            new StartUI().init(validate, tracker, getActionsList());
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //Store tracker = new MemTracker();
+        //new StartUI().init(validate, tracker, getActionsList());
     }
-    */
 }
