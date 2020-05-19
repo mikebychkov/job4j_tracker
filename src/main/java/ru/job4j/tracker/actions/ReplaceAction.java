@@ -1,4 +1,8 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.actions;
+
+import ru.job4j.tracker.Input;
+import ru.job4j.tracker.Item;
+import ru.job4j.tracker.Store;
 
 public class ReplaceAction implements UserAction {
     @Override
@@ -7,7 +11,7 @@ public class ReplaceAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, MemTracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         String id = input.askStr("Enter ID:");
         Item newItem = new Item(
                 input.askStr("Enter name:")

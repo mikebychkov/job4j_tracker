@@ -1,10 +1,12 @@
 package ru.job4j.tracker;
 
+import ru.job4j.tracker.actions.*;
+
 import java.util.List;
 
 public class StartUI {
 
-    public void init(Input input, MemTracker tracker, List<UserAction> actions) {
+    public void init(Input input, Store tracker, List<UserAction> actions) {
         boolean run = true;
         while (run) {
             this.showMenu(actions);
@@ -24,7 +26,7 @@ public class StartUI {
     public static void main(String[] args) {
         Input input = new ConsoleInput();
         Input validate = new ValidateInput(input);
-        MemTracker tracker = new MemTracker();
+        Store tracker = new MemTracker();
         List<UserAction> actions = List.of(
                 new CreateAction(),
                 new ShowAllAction(),
@@ -36,4 +38,20 @@ public class StartUI {
         );
         new StartUI().init(validate, tracker, actions);
     }
+    /*
+    public static void main(String[] args) {
+        Input validate = new ValidateInput(
+                new ConsoleInput()
+        );
+        try (Store tracker = new SqlTracker()) {
+            tracker.init();
+            UserAction[] actions = {
+                    new CreateAction()
+            };
+            new StartUI().init(validate, tracker, actions);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    */
 }

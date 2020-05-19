@@ -1,4 +1,7 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.actions;
+
+import ru.job4j.tracker.Input;
+import ru.job4j.tracker.Store;
 
 public class StubAction implements UserAction {
 
@@ -10,7 +13,7 @@ public class StubAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, MemTracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         this.call = true;
         return false;
     }
