@@ -15,7 +15,7 @@ public class StartUITest {
     public void whenAddItem() {
         String[] answers = {"Fix PC"};
         Input input = new StubInput(answers);
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         UserAction create = new CreateAction();
         create.execute(input, tracker);
         Item created = tracker.findAll().get(0);
@@ -25,7 +25,7 @@ public class StartUITest {
 
     @Test
     public void whenReplaceItem() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = new Item("new item");
         tracker.add(item);
         String[] answers = {
@@ -40,7 +40,7 @@ public class StartUITest {
 
     @Test
     public void whenDelete() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = new Item("new item");
         tracker.add(item);
         String[] answers = {
@@ -58,7 +58,7 @@ public class StartUITest {
                 new String[] {"0"}
         );
         StubAction action = new StubAction();
-        new StartUI().init(input, new Tracker(), List.of(action));
+        new StartUI().init(input, new MemTracker(), List.of(action));
         assertThat(action.isCall(), is(true));
     }
 
@@ -71,7 +71,7 @@ public class StartUITest {
                 new String[] {"0"}
         );
         StubAction action = new StubAction();
-        new StartUI().init(input, new Tracker(), List.of(action));
+        new StartUI().init(input, new MemTracker(), List.of(action));
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("Menu:")
                 .add("0. Stub action")
