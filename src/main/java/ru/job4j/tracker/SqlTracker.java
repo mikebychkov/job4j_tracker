@@ -124,7 +124,7 @@ public class SqlTracker implements Store {
         try (PreparedStatement st = cn.prepareStatement(query)) {
             st.setInt(1, Integer.parseInt(id));
             ResultSet rs = st.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 Item it = new Item(rs.getString(2));
                 it.setId(String.valueOf(rs.getInt(1)));
                 return it;
