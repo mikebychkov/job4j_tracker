@@ -40,7 +40,7 @@ public class StartUI {
         Input input = new ConsoleInput();
         Input validate = new ValidateInput(input);
         try (Store tracker = new SqlTracker()) {
-            tracker.init();
+            //tracker.init();
             new StartUI().init(validate, tracker, getActionsList());
         } catch (Exception e) {
             e.printStackTrace();

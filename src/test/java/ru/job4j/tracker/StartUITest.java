@@ -74,6 +74,7 @@ public class StartUITest {
         StubAction action = new StubAction();
         new StartUI().init(input, new MemTracker(), List.of(action));
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+                .add("")
                 .add("Menu:")
                 .add("0. Stub action")
                 .toString();
