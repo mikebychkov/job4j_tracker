@@ -52,7 +52,7 @@ public class SqlTracker implements Store, AutoCloseable {
             ResultSet genKeys = st.getGeneratedKeys();
             if (genKeys.next()) {
                 int newID = genKeys.getInt(1);
-                item.setId(String.valueOf(newID));
+                item.setId(newID);
                 return item;
             }
         } catch (SQLException e) {
@@ -62,11 +62,11 @@ public class SqlTracker implements Store, AutoCloseable {
     }
 
     @Override
-    public boolean replace(String id, Item item) {
+    public boolean replace(int id, Item item) {
         String query = "UPDATE Items SET name = ? WHERE id = ?";
         try (PreparedStatement st = cn.prepareStatement(query)) {
             st.setString(1, item.getName());
-            st.setInt(2, Integer.parseInt(id));
+            st.setInt(2, id);
             int rsl = st.executeUpdate();
             if (rsl > 0) {
                 return true;
@@ -78,10 +78,10 @@ public class SqlTracker implements Store, AutoCloseable {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(int id) {
         String query = "DELETE FROM Items WHERE id = ?";
         try (PreparedStatement st = cn.prepareStatement(query)) {
-            st.setInt(1, Integer.parseInt(id));
+            st.setInt(1, id);
             int rsl = st.executeUpdate();
             if (rsl > 0) {
                 return true;
@@ -99,7 +99,7 @@ public class SqlTracker implements Store, AutoCloseable {
             ResultSet rs = st.executeQuery("SELECT id, name FROM Items");
             while (rs.next()) {
                 Item it = new Item(rs.getString(2));
-                it.setId(String.valueOf(rs.getInt(1)));
+                it.setId(rs.getInt(1));
                 rsl.add(it);
             }
         } catch (SQLException e) {
@@ -117,7 +117,7 @@ public class SqlTracker implements Store, AutoCloseable {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Item it = new Item(rs.getString(2));
-                it.setId(String.valueOf(rs.getInt(1)));
+                it.setId(rs.getInt(1));
                 rsl.add(it);
             }
         } catch (SQLException e) {
@@ -127,14 +127,14 @@ public class SqlTracker implements Store, AutoCloseable {
     }
 
     @Override
-    public Item findById(String id) {
+    public Item findById(int id) {
         String query = "SELECT id, name FROM Items WHERE id = ?";
         try (PreparedStatement st = cn.prepareStatement(query)) {
-            st.setInt(1, Integer.parseInt(id));
+            st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 Item it = new Item(rs.getString(2));
-                it.setId(String.valueOf(rs.getInt(1)));
+                it.setId(rs.getInt(1));
                 return it;
             }
         } catch (SQLException e) {

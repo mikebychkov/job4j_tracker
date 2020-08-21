@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class MemTracker implements Store {
 
-    private final List<Item> items = new ArrayList<Item>();
+    private final List<Item> items = new ArrayList<>();
 
     @Override
     public void init() {
@@ -19,9 +19,9 @@ public class MemTracker implements Store {
         return item;
     }
 
-    private String generateId() {
+    private int generateId() {
         Random rm = new Random();
-        return String.valueOf(rm.nextLong() + System.currentTimeMillis());
+        return (int) (rm.nextInt() + System.currentTimeMillis());
     }
 
     public List<Item> findAll() {
@@ -29,7 +29,7 @@ public class MemTracker implements Store {
     }
 
     public List<Item> findByName(String key) {
-        List<Item> resultItems = new ArrayList<Item>();
+        List<Item> resultItems = new ArrayList<>();
         for (Item it : items) {
             if (it.getName().equals(key)) {
                 resultItems.add(it);
@@ -38,12 +38,12 @@ public class MemTracker implements Store {
         return resultItems;
     }
 
-    public Item findById(String id) {
+    public Item findById(int id) {
         int index = indexOf(id);
         return index != -1 ? this.items.get(index) : null;
     }
 
-    private int indexOf(String id) {
+    private int indexOf(int id) {
         int index = 0;
         for (Item it : this.items) {
             if (it.getId().equals(id)) {
@@ -54,7 +54,7 @@ public class MemTracker implements Store {
         return -1;
     }
 
-    public boolean replace(String id, Item item) {
+    public boolean replace(int id, Item item) {
         int index = indexOf(id);
         if (index != -1) {
             this.items.set(index, item);
@@ -63,7 +63,7 @@ public class MemTracker implements Store {
         return index != -1;
     }
 
-    public boolean delete(String id) {
+    public boolean delete(int id) {
         int index = indexOf(id);
         if (index != -1) {
             this.items.remove(index);
