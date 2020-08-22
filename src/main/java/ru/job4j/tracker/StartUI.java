@@ -4,6 +4,7 @@ import ru.job4j.tracker.actions.*;
 import ru.job4j.tracker.inputs.ConsoleInput;
 import ru.job4j.tracker.inputs.Input;
 import ru.job4j.tracker.inputs.ValidateInput;
+import ru.job4j.tracker.trackers.HbmTracker;
 import ru.job4j.tracker.trackers.SqlTracker;
 import ru.job4j.tracker.trackers.Store;
 
@@ -44,12 +45,27 @@ public class StartUI {
     public static void main(String[] args) {
         Input input = new ConsoleInput();
         Input validate = new ValidateInput(input);
+
+        // SQL TRACKER
+        /*
         try (Store tracker = new SqlTracker()) {
             new StartUI().init(validate, tracker, getActionsList());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //Store tracker = new MemTracker();
-        //new StartUI().init(validate, tracker, getActionsList());
+        */
+
+        // MEMORY TRACKER
+        /*
+        Store tracker = new MemTracker();
+        new StartUI().init(validate, tracker, getActionsList());
+        */
+
+        // HIBERNATE TRACKER
+        try (Store tracker = new HbmTracker()) {
+            new StartUI().init(validate, tracker, getActionsList());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
