@@ -2,9 +2,8 @@ package ru.job4j.tracker.actions;
 
 import org.junit.Test;
 import ru.job4j.tracker.Item;
-import ru.job4j.tracker.MemTracker;
-import ru.job4j.tracker.StubInput;
-import ru.job4j.tracker.actions.ShowAllAction;
+import ru.job4j.tracker.trackers.MemTracker;
+import ru.job4j.tracker.inputs.StubInput;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
