@@ -61,4 +61,40 @@ public class HbmTrackerTest {
 
         tracker.close();
     }
+
+    @Test
+    public void addThenFindById() throws Exception {
+        HbmTracker tracker = new HbmTracker();
+
+        Item item1 = new Item("Hibernate#1");
+        Item item2 = new Item("Hibernate#2");
+
+        item1 = tracker.add(item1);
+        item2 = tracker.add(item2);
+
+        Item rsl = tracker.findById(item2.getId());
+
+        assertEquals("Hibernate#2", rsl.getName());
+
+        tracker.close();
+    }
+
+    @Test
+    public void addThenReplace() throws Exception {
+        HbmTracker tracker = new HbmTracker();
+
+        Item item1 = new Item("Hibernate#1");
+        Item item2 = new Item("Hibernate#2");
+
+        item1 = tracker.add(item1);
+        item2 = tracker.add(item2);
+
+        tracker.replace(item2.getId(), item1);
+
+        Item rsl = tracker.findById(item2.getId());
+
+        assertEquals("Hibernate#1", rsl.getName());
+
+        tracker.close();
+    }
 }
